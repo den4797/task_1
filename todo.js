@@ -52,19 +52,18 @@ function add() {
 }
 
 function changeLabel() {
-    const label = $('label[id="' + id + '"]');
-    let id = this.getAttribute('id'),
-        description = label.value();
+    const id = this.getAttribute('id');
 
-    label.hide();
+    $('label[id="' + id + '"]').hide();
     $('.edit-input[id="' + id + '"]').show().focus();
 }
 
 function labelChanged() {
-    let id = this.getAttribute('id'),
-        description = $('.edit-input[id=' + id + ']').value();
+    const id = this.getAttribute('id'),
+        description = $('.edit-input[id=' + id + ']').val();
 
     todoList.edit_task(id, description);
+    showTaskList();
 }
 
 function changeStatus(task_id) {
@@ -75,6 +74,7 @@ function changeStatus(task_id) {
     } else {
         todoList.complete_task(task_id)
     }
+    showTaskList();
 }
 
 function isTaskCompleted(task_id) {
